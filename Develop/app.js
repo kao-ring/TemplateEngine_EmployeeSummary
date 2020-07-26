@@ -16,9 +16,111 @@ const startQuestion = [
     type: "list",
     message: "Which type of member would you like to add?",
     name: "type",
-    choices: ["Manager", "Engineer", "Intern"],
+    choices: [
+      "Manager",
+      "Engineer",
+      "Intern",
+      "I don't want to add any more team members.",
+    ],
   },
 ];
+
+const mQuestions = [
+  {
+    type: "input",
+    message: "What is your manager's name?",
+    name: "mName",
+  },
+  {
+    type: "input",
+    message: "What is your manager's ID?",
+    name: "mID",
+  },
+  {
+    type: "input",
+    message: "What is your manager's e-mail?",
+    name: "mEmail",
+  },
+  {
+    type: "input",
+    message: "What is your manager's office number?",
+    name: "mPhone",
+  },
+];
+
+const eQuestions = [
+  {
+    type: "input",
+    message: "What is your engineer's name?",
+    name: "eName",
+  },
+  {
+    type: "input",
+    message: "What is your engineer's ID?",
+    name: "eID",
+  },
+  {
+    type: "input",
+    message: "What is your engineer's e-mail?",
+    name: "eEmail",
+  },
+  {
+    type: "input",
+    message: "What is your engineer's github user name?",
+    name: "eGithub",
+  },
+];
+
+const iQuestions = [
+  {
+    type: "input",
+    message: "What is your intern's name?",
+    name: "iName",
+  },
+  {
+    type: "input",
+    message: "What is your intern's ID?",
+    name: "iID",
+  },
+  {
+    type: "input",
+    message: "What is your intern's e-mail?",
+    name: "iEmail",
+  },
+  {
+    type: "input",
+    message: "What is your intern's school?",
+    name: "iSchool",
+  },
+];
+
+async function questions() {
+  let input = await inquirer.prompt(startQuestion);
+  while (input !== "I don't want to add any more team members.") {
+    switch (input) {
+      case "Manager":
+        console.log("ジャーマネ");
+        inquirer.prompt(mQuestions);
+        break;
+
+      case "Engineer":
+        inquirer.prompt(eQuestions);
+        break;
+
+      case "Intern":
+        inquirer.prompt(iQuestions);
+        break;
+      default:
+    }
+  }
+}
+
+function init() {
+  console.log("Please build your team");
+  questions();
+}
+
+init();
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required

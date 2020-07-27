@@ -9,13 +9,15 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-let member = [];
+
 // Write code to use inquirer to gather information about the development team members,
+let employeesArray = [];
+let employee = "";
 const startQuestion = [
   {
     type: "list",
     message: "Which type of member would you like to add?",
-    name: "type",
+    name: "role",
     choices: [
       "Manager",
       "Engineer",
@@ -29,22 +31,22 @@ const mQuestions = [
   {
     type: "input",
     message: "What is your manager's name?",
-    name: "mName",
+    name: "name",
   },
   {
     type: "input",
     message: "What is your manager's ID?",
-    name: "mID",
+    name: "id",
   },
   {
     type: "input",
     message: "What is your manager's e-mail?",
-    name: "mEmail",
+    name: "email",
   },
   {
     type: "input",
     message: "What is your manager's office number?",
-    name: "mPhone",
+    name: "officeNumber",
   },
 ];
 
@@ -52,22 +54,22 @@ const eQuestions = [
   {
     type: "input",
     message: "What is your engineer's name?",
-    name: "eName",
+    name: "name",
   },
   {
     type: "input",
     message: "What is your engineer's ID?",
-    name: "eID",
+    name: "id",
   },
   {
     type: "input",
     message: "What is your engineer's e-mail?",
-    name: "eEmail",
+    name: "email",
   },
   {
     type: "input",
     message: "What is your engineer's github user name?",
-    name: "eGithub",
+    name: "github",
   },
 ];
 
@@ -75,52 +77,65 @@ const iQuestions = [
   {
     type: "input",
     message: "What is your intern's name?",
-    name: "iName",
+    name: "name",
   },
   {
     type: "input",
     message: "What is your intern's ID?",
-    name: "iID",
+    name: "id",
   },
   {
     type: "input",
     message: "What is your intern's e-mail?",
-    name: "iEmail",
+    name: "email",
   },
   {
     type: "input",
     message: "What is your intern's school?",
-    name: "iSchool",
+    name: "school",
   },
 ];
 
 function questions() {
-  member = [];
-  inquirer.prompt(startQuestion).then(function ({ type }) {
-    member.push(this.JSON.stringify(type));
-    console.log(member);
-    switch (type) {
+  inquirer.prompt(startQuestion).then(function ({ role }) {
+    switch (role) {
       case "Manager":
-        inquirer.prompt(mQuestions).then(function (res) {
-          member.push(this.JSON.stringify(res));
-          questions();
-        });
+        inquirer
+          .prompt(mQuestions)
+          .then(function ({ name, id, email, officeNumber }) {
+            employee = new Manager(name, id, email, officeNumber);
+            employeesArray.push(employee);
+            console.log(startQuestion[0].choices);
+            startQuestion[0].choices = [
+              "Engineer",
+              "Intern",
+              "I don't want to add any more team members.",
+            ];
+            questions();
+          });
         break;
 
       case "Engineer":
-        inquirer.prompt(eQuestions).then(function (res) {
-          member.push(this.JSON.stringify(res));
-          questions();
-        });
+        inquirer
+          .prompt(eQuestions)
+          .then(function ({ name, id, email, github }) {
+            employee = new Engineer(name, id, email, github);
+            employeesArray.push(employee);
+            questions();
+          });
         break;
 
       case "Intern":
-        inquirer.prompt(iQuestions).then(function (res) {
-          member.push(this.JSON.stringify(res));
-          questions();
-        });
+        inquirer
+          .prompt(iQuestions)
+          .then(function ({ name, id, email, school }) {
+            employee = new Intern(name, id, email, school);
+            employeesArray.push(employee);
+            questions();
+          });
         break;
       default:
+        console.log(employeesArray);
         console.log("error");
     }
 

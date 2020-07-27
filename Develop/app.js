@@ -9,7 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
+let member = [];
 // Write code to use inquirer to gather information about the development team members,
 const startQuestion = [
   {
@@ -94,25 +94,38 @@ const iQuestions = [
   },
 ];
 
-async function questions() {
-  let input = await inquirer.prompt(startQuestion);
-  while (input !== "I don't want to add any more team members.") {
-    switch (input) {
+function questions() {
+  member = [];
+  inquirer.prompt(startQuestion).then(function ({ type }) {
+    member.push(this.JSON.stringify(type));
+    console.log(member);
+    switch (type) {
       case "Manager":
-        console.log("ジャーマネ");
-        inquirer.prompt(mQuestions);
+        inquirer.prompt(mQuestions).then(function (res) {
+          member.push(this.JSON.stringify(res));
+          questions();
+        });
         break;
 
       case "Engineer":
-        inquirer.prompt(eQuestions);
+        inquirer.prompt(eQuestions).then(function (res) {
+          member.push(this.JSON.stringify(res));
+          questions();
+        });
         break;
 
       case "Intern":
-        inquirer.prompt(iQuestions);
+        inquirer.prompt(iQuestions).then(function (res) {
+          member.push(this.JSON.stringify(res));
+          questions();
+        });
         break;
       default:
+        console.log("error");
     }
-  }
+
+    //}
+  });
 }
 
 function init() {

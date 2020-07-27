@@ -13,6 +13,7 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 let employeesArray = [];
 let employee = "";
+
 const startQuestion = [
   {
     type: "list",
@@ -135,20 +136,23 @@ function questions() {
           });
         break;
       default:
+        console.log("input done");
         console.log(employeesArray);
-        console.log("error");
+        return;
+      // render
+      // outputPath
     }
-
-    //}
   });
 }
 
 function init() {
   console.log("Please build your team");
   questions();
+  console.log("*****after question*****");
 }
 
 init();
+
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required

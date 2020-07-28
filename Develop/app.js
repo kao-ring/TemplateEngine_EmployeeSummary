@@ -135,28 +135,32 @@ function questions() {
             questions();
           });
         break;
-      //Display after finishing input==================
+
       default:
-        const employeeData = render(employeesArray);
-        fs.writeFile(outputPath, employeeData, function (err) {
-          if (err) {
-            //if writeFile couldn't find a destination, make a directry here
-            fs.mkdir(OUTPUT_DIR, function (err) {
-              if (err) {
-                throw new Error("mkdir failed");
-              } else {
-                console.log("successfully created directory.");
-                fs.writeFile(outputPath, employeeData, function (err) {
-                  if (err) {
-                    throw new Error("write to html failed");
-                  }
-                });
-              }
-            });
-          }
-          console.log("Succesefully created team cards!");
-        });
+        outPut();
     }
+  });
+}
+
+function outPut() {
+  const employeeData = render(employeesArray);
+  fs.writeFile(outputPath, employeeData, function (err) {
+    if (err) {
+      //if writeFile couldn't find a destination, make a directry here
+      fs.mkdir(OUTPUT_DIR, function (err) {
+        if (err) {
+          throw new Error("mkdir failed");
+        } else {
+          console.log("successfully created directory.");
+          fs.writeFile(outputPath, employeeData, function (err) {
+            if (err) {
+              throw new Error("write to html failed");
+            }
+          });
+        }
+      });
+    }
+    console.log("Succesefully created team cards!");
   });
 }
 

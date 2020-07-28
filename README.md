@@ -37,6 +37,8 @@ npm install jest --save-dev / npm run test
 
 ![Untitled_ Jul 27, 2020 10_36 PM (1)](https://user-images.githubusercontent.com/66850293/88612786-fa67e100-d059-11ea-89e2-932aeeab16c4.gif)
 
+![Screen Shot 2020-07-27 at 10 47 26 PM](https://user-images.githubusercontent.com/66850293/88613923-9d215f00-d05c-11ea-9123-5c7ad161105c.png)
+
 ## License
 
 This project is licensed under the [MIT](./LICENSE).

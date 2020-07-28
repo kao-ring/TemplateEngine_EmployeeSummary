@@ -10,10 +10,10 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-// Write code to use inquirer to gather information about the development team members,
 let employeesArray = [];
 let employee = "";
 
+//Questions
 const startQuestion = [
   {
     type: "list",
@@ -96,7 +96,7 @@ const iQuestions = [
     name: "school",
   },
 ];
-
+//Promt start===============================
 function questions() {
   inquirer.prompt(startQuestion).then(function ({ role }) {
     switch (role) {
@@ -106,7 +106,7 @@ function questions() {
           .then(function ({ name, id, email, officeNumber }) {
             employee = new Manager(name, id, email, officeNumber);
             employeesArray.push(employee);
-            // console.log(startQuestion[0].choices);
+            //Because the team has only one manager, delete manager from choice after input
             startQuestion[0].choices = [
               "Engineer",
               "Intern",
@@ -135,13 +135,12 @@ function questions() {
             questions();
           });
         break;
+      //Display after finishing input==================
       default:
-        // console.log("input done");
-        // console.log(employeesArray);
         const employeeData = render(employeesArray);
-
         fs.writeFile(outputPath, employeeData, function (err) {
           if (err) {
+            //if writeFile couldn't find a destination, make a directry here
             fs.mkdir(OUTPUT_DIR, function (err) {
               if (err) {
                 throw new Error("mkdir failed");
@@ -155,7 +154,7 @@ function questions() {
               }
             });
           }
-          console.log("Succesefully created a team cards!");
+          console.log("Succesefully created team cards!");
         });
     }
   });

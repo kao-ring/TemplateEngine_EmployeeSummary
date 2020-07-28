@@ -6,9 +6,9 @@ https://github.com/kao-ring/TemplateEngine_EmployeeSummary
 
 **Description:** This is a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person so that you have quick access to emails and GitHub profiles. You can input any number of team members, and may be a mix of engineers and interns.
 
-![TemplateEngine_EmployeeSummary](https://user-images.githubusercontent.com/66850293/88611678-8fb5a600-d057-11ea-854b-e0e7ed821a52.gif)
+![Gif_Video](https://user-images.githubusercontent.com/66850293/88611678-8fb5a600-d057-11ea-854b-e0e7ed821a52.gif)
 
-![Screen Shot 2020-07-27 at 10 47 26 PM](https://user-images.githubusercontent.com/66850293/88613923-9d215f00-d05c-11ea-9123-5c7ad161105c.png)
+![ScreenShot](https://user-images.githubusercontent.com/66850293/88615992-01deb880-d061-11ea-8862-194f39f8767b.png)
 
 ## Table of Contents
 
